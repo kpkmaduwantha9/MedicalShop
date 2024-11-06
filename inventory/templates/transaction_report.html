@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Transaction Report</h2>
+
+<h4>Total Medicines Sold: {{ total_sales }}</h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Medicine Name</th>
+            <th>Quantity Sold</th>
+            <th>Date of Transaction</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.patient.name }}</td>
+                <td>{{ transaction.product.name }}</td>
+                <td>{{ transaction.quantity }}</td>
+                <td>{{ transaction.date }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No transactions found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4>Product Details</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Medicine Name</th>
+            <th>MRP</th>
+            <th>Quantity in Stock</th>
+            <th>Expiry Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.mrp }}</td>
+                <td>{{ product.stock_quantity }}</td>
+                <td>{{ product.expiry_date }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No products available.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
